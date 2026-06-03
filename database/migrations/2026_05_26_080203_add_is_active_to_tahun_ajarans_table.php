@@ -10,22 +10,23 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::table('tahun_ajarans', function (Blueprint $table) {
-        $table->id();
-        $table->string('tahun_ajaran');
-        $table->boolean('is_active')->default(false)->after('tahun_ajaran');
-        $table->timestamps();
-    });
-}
+    {
+        if (!Schema::hasColumn('tahun_ajarans', 'is_active')) {
+            Schema::table('tahun_ajarans', function (Blueprint $table) {
+                $table->boolean('is_active')->default(false)->after('tahun_ajaran');
+            });
+        }
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-{
-    Schema::table('tahun_ajarans', function (Blueprint $table) {
-        $table->dropColumn('is_active');
-    });
-}
+    {
+        if (Schema::hasColumn('tahun_ajarans', 'is_active')) {
+            Schema::table('tahun_ajarans', function (Blueprint $table) {
+                $table->dropColumn('is_active');
+            });
+        }
+    }
 };
