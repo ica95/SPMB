@@ -1,85 +1,61 @@
-<?php
+﻿<?php
 
-namespace App\Http\Controllers;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use App\Models\BiodataCalonSiswa;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\ProgramKeahlian;
-use App\Models\TahunAjaran;
-use App\Models\GelombangPpdb;
-
-class BiodataController extends Controller
+return new class extends Migration
 {
-    public function create()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
-        $biodata = BiodataCalonSiswa::where('user_id', Auth::id())->first();
+        Schema::create('biodata_calon_siswas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('program_keahlian_id')->nullable();
+            $table->foreignId('tahun_ajaran_id')->nullable();
+            $table->foreignId('gelombang_ppdb_id')->nullable();
 
-        if ($biodata && $biodata->is_final) {
-            return redirect()->route('pendaftaran.status')
-                ->with('error', 'Data sudah final dan tidak dapat diubah.');
-        }
+            $table->string('nama_lengkap');
+            $table->string('nisn')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('golongan_darah')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('rumah_tinggal')->nullable();
+            $table->string('no_hp')->nullable();
+            $table->string('asal_sekolah')->nullable();
+            $table->text('alamat_asal_sekolah')->nullable();
 
-        $programKeahlian = ProgramKeahlian::where('status', 'aktif')->get();
+            $table->string('status_pembayaran')->default('belum_bayar');
+            $table->string('bukti_pembayaran')->nullable();
+            $table->timestamp('tanggal_pembayaran')->nullable();
 
-        return view('ppdb.biodata', compact('biodata', 'programKeahlian'));
+            $table->string('file_kk')->nullable();
+            $table->string('file_akta')->nullable();
+            $table->string('file_skl')->nullable();
+            $table->string('file_foto')->nullable();
+            $table->string('file_surat_sehat')->nullable();
+            $table->string('file_surat_warna')->nullable();
+
+            $table->string('status_seleksi')->default('menunggu');
+            $table->boolean('status_final')->default(false);
+            $table->string('status_pendaftaran')->default('menunggu');
+            $table->boolean('is_final')->default(false);
+
+            $table->timestamps();
+        });
     }
 
-    public function store(Request $request)
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-        $biodata = BiodataCalonSiswa::where('user_id', Auth::id())->first();
-
-        if ($biodata && $biodata->is_final) {
-            return redirect()->route('pendaftaran.status')
-                ->with('error', 'Data sudah final dan tidak dapat diubah.');
-        }
-
-        $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'nisn' => 'required|string|max:20',
-            'jenis_kelamin' => 'required|in:Laki-Laki,Perempuan',
-            'agama' => 'required|in:Islam,Kristen,Katolik,Hindu,Budha,Konghucu',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
-            'golongan_darah' => 'required|in:A,B,AB,O',
-            'hobi_kegemaran' => 'required|string|max:255',
-            'alamat' => 'required|string',
-            'rumah_tinggal' => 'required|in:Orang Tua,Wali,Kost,Panti Asuhan',
-            'no_hp' => 'required|string|max:20',
-            'asal_sekolah' => 'required|string|max:255',
-            'alamat_asal_sekolah' => 'required|string',
-            'program_keahlian_id' => 'required|exists:program_keahlians,id',
-        ]);
-
-        $tahunAjaran = TahunAjaran::where('is_active', true)->first();
-        $gelombang = GelombangPpdb::where('status', 'aktif')->first();
-
-        BiodataCalonSiswa::updateOrCreate(
-            [
-                'user_id' => Auth::id(),
-            ],
-            [
-                'tahun_ajaran_id' => $tahunAjaran?->id,
-                'gelombang_ppdb_id' => $gelombang?->id,
-                'program_keahlian_id' => $request->program_keahlian_id,
-
-                'nama_lengkap' => $request->nama_lengkap,
-                'nisn' => $request->nisn,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'agama' => $request->agama,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
-                'golongan_darah' => $request->golongan_darah,
-                'hobi_kegemaran' => $request->hobi_kegemaran,
-                'alamat' => $request->alamat,
-                'rumah_tinggal' => $request->rumah_tinggal,
-                'no_hp' => $request->no_hp,
-                'asal_sekolah' => $request->asal_sekolah,
-                'alamat_asal_sekolah' => $request->alamat_asal_sekolah,
-            ]
-        );
-
-        return redirect()->route('orangtua.create')
-            ->with('success', 'Biodata berhasil disimpan. Silakan lanjut isi data orang tua / wali.');
+        Schema::dropIfExists('biodata_calon_siswas');
     }
-}
+};
