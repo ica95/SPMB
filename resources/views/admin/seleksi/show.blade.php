@@ -47,17 +47,9 @@
         <h4 class="mt-4">Data Orang Tua / Wali</h4>
         <table class="table table-bordered">
             <tr><th width="30%">Nama Ayah</th><td>{{ $orangtua->nama_ayah ?? '-' }}</td></tr>
-            <tr><th>Pendidikan Ayah</th><td>{{ $orangtua->pendidikan_ayah ?? '-' }}</td></tr>
             <tr><th>Pekerjaan Ayah</th><td>{{ $orangtua->pekerjaan_ayah ?? '-' }}</td></tr>
-            <tr><th>Penghasilan Ayah</th><td>{{ $orangtua->penghasilan_ayah ?? '-' }}</td></tr>
-            <tr><th>No HP Ayah</th><td>{{ $orangtua->no_hp_ayah ?? '-' }}</td></tr>
-
             <tr><th>Nama Ibu</th><td>{{ $orangtua->nama_ibu ?? '-' }}</td></tr>
-            <tr><th>Pendidikan Ibu</th><td>{{ $orangtua->pendidikan_ibu ?? '-' }}</td></tr>
             <tr><th>Pekerjaan Ibu</th><td>{{ $orangtua->pekerjaan_ibu ?? '-' }}</td></tr>
-            <tr><th>Penghasilan Ibu</th><td>{{ $orangtua->penghasilan_ibu ?? '-' }}</td></tr>
-            <tr><th>No HP Ibu</th><td>{{ $orangtua->no_hp_ibu ?? '-' }}</td></tr>
-
             <tr><th>Nama Wali</th><td>{{ $orangtua->nama_wali ?? '-' }}</td></tr>
             <tr><th>Pekerjaan Wali</th><td>{{ $orangtua->pekerjaan_wali ?? '-' }}</td></tr>
             <tr><th>No HP Orang Tua / Wali</th><td>{{ $orangtua->no_hp_orangtua_wali ?? '-' }}</td></tr>
