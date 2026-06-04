@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BiodataCalonSiswa;
 use App\Models\DataOrangTua;
 use App\Models\Prestasi;
+use App\Models\PengumumanPpdb;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,14 +32,18 @@ class PpdbController extends Controller
         return redirect()->route('siswa.masuk');
     }
 
-    public function masukSiswa()
-    {
-        $user = Auth::user();
+   public function masukSiswa()
+{
+    $user = Auth::user();
 
-        $biodata = BiodataCalonSiswa::where('user_id', $user->id)->first();
+    $biodata = BiodataCalonSiswa::where('user_id', $user->id)->first();
 
-        return view('ppdb.masuk-siswa', compact('user', 'biodata'));
-    }
+    $pengumuman = PengumumanPpdb::where('status', 'publish')
+        ->orderBy('tanggal', 'desc')
+        ->get();
+
+    return view('ppdb.masuk-siswa', compact('user', 'biodata', 'pengumuman'));
+}
 
     public function review()
     {

@@ -100,52 +100,41 @@
     </div>
 
     {{-- AKSI SISWA --}}
-    @if(($biodata->status_pembayaran ?? 'belum_bayar') == 'belum_bayar')
+@if(($biodata->status_pembayaran ?? 'belum_bayar') == 'belum_bayar')
 
-        <div class="col-md-6">
-            <a href="{{ route('pembayaran.index') }}" class="text-decoration-none">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-money-bill-wave fa-3x mb-3"></i>
-                        <h4>Bayar Pendaftaran</h4>
-                    </div>
+    <div class="col-md-6">
+        <a href="{{ route('pembayaran.index') }}" class="text-decoration-none">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-money-bill-wave fa-3x mb-3"></i>
+                    <h4>Bayar Pendaftaran</h4>
                 </div>
-            </a>
-        </div>
-
-    @elseif(($biodata->status_pembayaran ?? 'belum_bayar') == 'menunggu_verifikasi')
-
-        <div class="col-12">
-            <div class="alert alert-warning">
-                Pembayaran Anda sedang menunggu verifikasi admin.
             </div>
+        </a>
+    </div>
+
+@elseif(($biodata->status_pembayaran ?? 'belum_bayar') == 'menunggu_verifikasi')
+
+    <div class="col-12">
+        <div class="alert alert-warning">
+            Pembayaran Anda sedang menunggu verifikasi admin.
         </div>
+    </div>
 
-    @elseif(($biodata->status_pembayaran ?? 'belum_bayar') == 'lunas' && !($biodata->is_final ?? 0))
+@elseif(($biodata->status_pembayaran ?? 'belum_bayar') == 'lunas' && !($biodata->is_final ?? 0))
 
-        <div class="col-md-6">
-            <a href="{{ route('biodata.create') }}" class="text-decoration-none">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-user-edit fa-3x mb-3"></i>
-                        <h4>Isi Formulir Pendaftaran</h4>
-                    </div>
+    <div class="col-md-6">
+        <a href="{{ route('biodata.create') }}" class="text-decoration-none">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-edit fa-3x mb-3"></i>
+                    <h4>Isi Formulir Pendaftaran</h4>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
+    </div>
 
-        <div class="col-md-6">
-            <a href="{{ route('review.index') }}" class="text-decoration-none">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <i class="fas fa-file-alt fa-3x mb-3"></i>
-                        <h4>Review Data Pendaftaran</h4>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-    @endif
+@endif
 
     @if($biodata && $biodata->is_final)
 
