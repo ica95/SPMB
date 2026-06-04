@@ -28,55 +28,36 @@
         </div>
     </div>
 
-    {{-- INFO PENGUMUMAN --}}
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header bg-success text-white">
-                <h3 class="card-title">
-                    <i class="fas fa-bullhorn"></i>
-                    Info Pengumuman
-                </h3>
-            </div>
+    {{-- INFO PENGUMUMAN DARI ADMIN --}}
+<div class="col-12">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h3 class="card-title">
+                <i class="fas fa-bullhorn"></i>
+                Info Pengumuman
+            </h3>
+        </div>
 
-            <div class="card-body">
-
-                @if(($biodata->status_pendaftaran ?? 'menunggu') == 'menunggu')
-
+        <div class="card-body">
+            @if(isset($pengumuman) && $pengumuman->count() > 0)
+                @foreach($pengumuman as $item)
                     <div class="mb-3 border-bottom pb-2">
-                        <h5>STATUS PENDAFTARAN MASIH MENUNGGU SELEKSI</h5>
-                        <small>{{ now()->format('Y-m-d') }}</small>
-                        <p>
-                            Data pendaftaran Anda sedang diproses oleh panitia SPMB.
-                            Silakan cek dashboard secara berkala.
-                        </p>
+                        <h5>{{ $item->judul }}</h5>
+
+                        @if($item->tanggal)
+                            <small>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</small>
+                        @endif
+
+                        <p class="mb-0">{{ $item->isi }}</p>
                     </div>
-
-                @elseif(($biodata->status_pendaftaran ?? 'menunggu') == 'diterima')
-
-                    <div class="mb-3 border-bottom pb-2">
-                        <h5>SELAMAT ANDA DINYATAKAN DITERIMA</h5>
-                        <small>{{ now()->format('Y-m-d') }}</small>
-                        <p>
-                            Jangan lupa cek jadwal secara berkala dan lakukan daftar ulang.
-                        </p>
-                    </div>
-
-                @elseif(($biodata->status_pendaftaran ?? 'menunggu') == 'tidak_diterima')
-
-                    <div class="mb-3 border-bottom pb-2">
-                        <h5>MOHON MAAF ANDA DINYATAKAN TIDAK DITERIMA</h5>
-                        <small>{{ now()->format('Y-m-d') }}</small>
-                        <p>
-                            Terima kasih telah mengikuti proses SPMB
-                            SMK Muhammadiyah 2 Banjarmasin.
-                        </p>
-                    </div>
-
-                @endif
-
-            </div>
+                @endforeach
+            @else
+                <p class="mb-0">Belum ada pengumuman yang dipublikasikan.</p>
+            @endif
         </div>
     </div>
+</div>
+
 
     {{-- STATUS PEMBAYARAN --}}
     <div class="col-md-6">
