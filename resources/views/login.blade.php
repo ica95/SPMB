@@ -31,9 +31,19 @@
                 </div>
 
                 <div class="auth-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Ketik password" required>
-                </div>
+    <label for="password">Password</label>
+
+    <div class="password-wrapper">
+        <input type="password"
+               id="password"
+               name="password"
+               placeholder="Ketik password"
+               required>
+
+        <i class="fas fa-eye toggle-password"
+           id="togglePassword"></i>
+    </div>
+</div>
 
                 <button type="submit" class="auth-btn">Masuk</button>
             </form>
@@ -47,4 +57,29 @@
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const password = document.getElementById('password');
+    const toggle = document.getElementById('togglePassword');
+
+    toggle.addEventListener('click', function () {
+
+        if (password.type === 'password') {
+            password.type = 'text';
+
+            toggle.classList.remove('fa-eye');
+            toggle.classList.add('fa-eye-slash');
+        } else {
+            password.type = 'password';
+
+            toggle.classList.remove('fa-eye-slash');
+            toggle.classList.add('fa-eye');
+        }
+
+    });
+
+});
+</script>
 @endsection
