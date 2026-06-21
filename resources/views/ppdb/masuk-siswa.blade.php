@@ -11,22 +11,30 @@
 <div class="row">
 
     {{-- IDENTITAS SISWA --}}
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header bg-success text-white">
-                <h3 class="card-title">
-                    <i class="fas fa-user"></i>
-                    Identitas Akun
-                </h3>
-            </div>
-
-            <div class="card-body">
-                <p><strong>Nama:</strong> {{ $user->name }}</p>
-                <p><strong>Email:</strong> {{ $user->email }}</p>
-                <p><strong>No. Pendaftaran:</strong> {{ $user->nomor_pendaftaran ?? '-' }}</p>
-            </div>
-        </div>
+    <div class="card">
+    <div class="card-header bg-success">
+        <h3 class="card-title">Identitas Akun</h3>
     </div>
+
+    <div class="card-body p-0">
+
+        <div class="p-3 border-bottom">
+            <small class="text-muted">Nama</small>
+            <h5>{{ auth()->user()->name }}</h5>
+        </div>
+
+        <div class="p-3 border-bottom">
+            <small class="text-muted">Email</small>
+            <h5>{{ auth()->user()->email }}</h5>
+        </div>
+
+        <div class="p-3">
+            <small class="text-muted">No. Pendaftaran</small>
+            <h5>{{ $user->nomor_pendaftaran ?? '-' }}</h5>
+        </div>
+
+    </div>
+</div>
 
     {{-- INFO PENGUMUMAN DARI ADMIN --}}
 <div class="col-12">

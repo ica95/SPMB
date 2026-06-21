@@ -34,9 +34,12 @@
                             {{ $biodata->tanggal_lahir ?? '-' }}
                         </p>
                         <p><strong>Golongan Darah:</strong> {{ $biodata->golongan_darah ?? '-' }}</p>
+                        <p><strong>Hobi:</strong> {{ $biodata->hobi_kegemaran ?? '-' }}</p>
                         <p><strong>Alamat:</strong> {{ $biodata->alamat ?? '-' }}</p>
+                        <p><strong>Rumah Tinggal:</strong> {{ $biodata->rumah_tinggal ?? '-' }}</p>
                         <p><strong>No HP:</strong> {{ $biodata->no_hp ?? '-' }}</p>
                         <p><strong>Asal Sekolah:</strong> {{ $biodata->asal_sekolah ?? '-' }}</p>
+                        <p><strong>Alamat Asal Sekolah:</strong> {{ $biodata->alamat_asal_sekolah ?? '-' }}</p>
                         <p><strong>Program Keahlian:</strong> {{ $biodata->programKeahlian->nama_program ?? '-' }}</p>
 
                         @if($biodata && !$biodata->is_final)

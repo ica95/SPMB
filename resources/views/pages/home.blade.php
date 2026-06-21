@@ -210,6 +210,55 @@
 
     </div>
 
+{{-- HUBUNGI KAMI --}}
+<section class="kontak-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <h2>Hubungi Kami</h2>
+            <p>Informasi kontak SMK Muhammadiyah 2 Banjarmasin</p>
+        </div>
+
+        <div class="kontak-item">
+    <h4>📞 Kontak Person</h4>
+
+    <p><strong>Panitia SPMB</strong></p>
+
+    <p>
+        Bapak Yahya : 088804391179
+    </p>
+
+    <p>
+        Ibu Muth : 081277754447
+    </p>
+
+    <p>
+        Website :
+        <a href="https://www.smkm2bjm.com" target="_blank">
+            www.smkm2bjm.com
+        </a>
+    </p>
+</div>
+
+        <div class="kontak-item">
+            <h4>📍 Alamat Sekolah</h4>
+            <p>
+                Jl. Cempaka Besar No. 29<br>
+                Banjarmasin Tengah<br>
+                Kalimantan Selatan
+            </p>
+        </div>
+
+        <div class="kontak-item">
+            <h4>🌐 Media Sosial</h4>
+            <p>Instagram : @smkmuh2bjm</p>
+            <p>Facebook : SMK Muhammadiyah 2 Banjarmasin</p>
+            <p>YouTube : SMK Muhammadiyah 2 Banjarmasin</p>
+        </div>
+
+    </div>
+
 </section>
 
 @endsection

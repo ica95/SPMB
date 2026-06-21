@@ -1788,3 +1788,25 @@ img {
     cursor: pointer;
     color: #777;
 }
+
+.kontak-section{
+    padding:70px 0;
+    background:#004d2b;
+}
+
+.kontak-item{
+    margin-bottom:35px;
+    padding-bottom:20px;
+    border-bottom:1px solid #ddd;
+}
+
+.kontak-item h4{
+    color:#fefefe;
+    margin-bottom:10px;
+    font-weight:700;
+}
+
+.kontak-item p{
+    margin:5px 0;
+    color:#ffffff;
+}
